@@ -106,4 +106,37 @@ assert_eq!(false as i32, 0);
 # Tuples
 tuples allow only constants as indices, like t.4. You can’t write t.i or t[i] to get the ith element.
 if you like, you may include a comma after a tuple’s last element: the types (&str, i32,) and (&str, i32) are equivalent, as are the expressions ("Brazil", 1985,) and ("Brazil", 1985).
-# three pointer types here: references, boxes, and unsafe pointers.
+## three pointer types here: references, boxes, and unsafe pointers.
+# References
+A value of type &String (pronounced “ref String”) is a reference to a String value, a &i32 is a reference to an i32, and so on.<br>
+
+It’s easiest to get started by thinking of references as Rust’s basic pointer type. At run time, a reference to an i32 is a single machine word holding the address of the i32, which may be on the stack or in the heap.<br>
+The expression &x produces a reference to x; in Rust terminology, we say that it borrows a reference to x. <br>
+Given a reference r, the expression *r refers to the value r points to. These are very much like the & and * operators in C and C++. And like a C pointer, a reference does not automatically free any resources when it goes out of scope.<br>
+Rust references are never null: there is simply no way to produce a null reference in safe Rust.<br>
+Rust tracks the ownership and lifetimes of values, so mistakes like dangling pointers, double frees, and pointer invalidation are ruled out at compile time.<br>
+# &T
+An immutable, shared reference. You can have many shared references to a given value at a time, but they are read-only: modifying the value they point to is forbidden, as with const T* in C.
+# &mut T 
+A mutable, exclusive reference. You can read and modify the value it points to, as with a T* in C. But for as long as the reference exists, you may not have any other references of any kind to that value. In fact, the only way you may access the value at all is through the mutable reference.
+# Boxes
+The simplest way to allocate a value in the heap is to use Box::new:
+```
+let t = (12, "eggs");
+let b = Box::new(t); // allocate a tuple in the heap
+The type of t is (i32, &str), so the type of b is Box<(i32, &str)>.
+```
+# raw pointers
+Rust also has the raw pointer types *mut T and *const T. Raw pointers really are just like pointers in C++. Using a raw pointer is unsafe, because Rust makes no effort to track what it points to. 
+# Arrays, Vectors, and Slices
+Rust has three types for representing a sequence of values in memory:<br>
+The type [T; N] represents an array of N values, each of type T. An array’s size is a constant determined at compile time and is part of the type; you can’t append new elements or shrink an array. <br>
+The type Vec<T>, called a vector of Ts, is a dynamically allocated, growable sequence of values of type T. A vector’s elements live on the heap, so <br>
+you can resize vectors at will: push new elements onto them, append other vectors to them, delete elements, and so on.<br>
+
+The types &[T] and &mut [T], called a shared slice of Ts and mutable slice of Ts, are references to a series of elements that are a part of some other value, like an array or vector.<br>
+ A mutable slice &mut [T] lets you read and modify elements, but can’t be shared; a shared slice &[T] lets you share access among several readers, but doesn’t let you modify elements<br>
+ 
+
+
+
