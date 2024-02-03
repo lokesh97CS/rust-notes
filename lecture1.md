@@ -103,4 +103,7 @@ assert_eq!(false as i32, 0);
 //However, as won’t convert in the other direction, from numeric types to bool. Instead, you must write out an explicit comparison like x != 0.
 
 ```
-
+# Tuples
+tuples allow only constants as indices, like t.4. You can’t write t.i or t[i] to get the ith element.
+if you like, you may include a comma after a tuple’s last element: the types (&str, i32,) and (&str, i32) are equivalent, as are the expressions ("Brazil", 1985,) and ("Brazil", 1985).
+# three pointer types here: references, boxes, and unsafe pointers.
