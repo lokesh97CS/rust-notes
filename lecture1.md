@@ -136,6 +136,11 @@ you can resize vectors at will: push new elements onto them, append other vector
 
 The types &[T] and &mut [T], called a shared slice of Ts and mutable slice of Ts, are references to a series of elements that are a part of some other value, like an array or vector.<br>
  A mutable slice &mut [T] lets you read and modify elements, but can’t be shared; a shared slice &[T] lets you share access among several readers, but doesn’t let you modify elements<br>
+ ### Arrays
+ ```
+let lazy_caterer: [u32; 6] = [1, 2, 4, 7, 11, 16];
+let taxonomy = ["Animalia", "Arthropoda", "Insecta"];
+```
  
 
 
